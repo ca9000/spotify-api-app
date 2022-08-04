@@ -1,6 +1,4 @@
 import requests
-import datetime
-from pprint import pprint as pp
 
 
 class SpotifyAPI:
@@ -8,7 +6,7 @@ class SpotifyAPI:
 
     def perform_auth(self):
         """
-        Generates access token and writes it in a file
+        :goal: Generates access token and writes it in a text file
         :return: access token in "token.txt"
         """
         token_data = {
@@ -23,12 +21,12 @@ class SpotifyAPI:
         with open("token.txt", "w") as txt_file:
             txt_file.write(access_token)
 
-    def search(self, query, search_type='artist'):
+    def get_search(self, query, search_type='track'):
         """
-        Performs a search with Spotify API
-        :param query: string
-        :param search_type: artist,track
-        :return: json
+        :goal: Performs a search with Spotify API
+        :param query: name of the artist we would like to get the tracks of
+        :param search_type: what type of search we would like to perform(track,artist)
+        :return: tracks on which the artist has been featured on
         """
         with open("token.txt", "r") as txt_file:
             access_token = txt_file.read()
@@ -38,17 +36,13 @@ class SpotifyAPI:
         params = {"q": query, "type": search_type.lower()}
         endpoint = "https://api.spotify.com/v1/search"
         r = requests.get(endpoint, headers=headers, params=params).json()
-        pp(r)
+        # pp(r)
         try:
             info = {"album_name": r["tracks"]["items"][0]["album"]["name"],
                     "release_date": r["tracks"]["items"][0]["album"]["release_date"]}
 
         except KeyError:
             self.perform_auth()
-            return self.search(query, search_type)
+            return self.get_search(query, search_type)
 
         return info
-
-
-spotify = SpotifyAPI()
-pp(spotify.search("NF", search_type='track'))

@@ -15,6 +15,7 @@ _script = sys.argv[0]
 _location = os.path.dirname(_script)
 
 import SpotifyAPIGuiV2_support
+import spotify_api
 
 _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
 _fgcolor = '#000000'  # X11 color: 'black'
@@ -55,7 +56,7 @@ class Toplevel1:
         self.Button1.configure(highlightcolor="black")
         self.Button1.configure(pady="0")
         self.Button1.configure(text='''Search''')
-        self.Button1.bind('<Button-1>',lambda e:SpotifyAPIGuiV2_support.Past5YearsButton(e))
+        self.Button1.bind('<Button-1>', lambda e: SpotifyAPIGuiV2_support.search_button(e))
 
         self.Label1 = tk.Label(self.top)
         self.Label1.place(relx=0.083, rely=0.044, height=56, width=132)

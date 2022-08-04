@@ -11,7 +11,8 @@ import tkinter.ttk as ttk
 from tkinter.constants import *
 
 import SpotifyAPIGuiV2
-import spotify_api
+from spotify_api import SpotifyAPI
+
 
 def main(*args):
     '''Main entry point for the application.'''
@@ -24,8 +25,8 @@ def main(*args):
     _w1 = SpotifyAPIGuiV2.Toplevel1(_top1)
     root.mainloop()
 
-def Past5YearsButton(*args):
-    _w1.output.configure(text="Hello")
+def search_button(*args):
+    print("2")
 
 if __name__ == '__main__':
     SpotifyAPIGuiV2.start_up()
