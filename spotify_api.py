@@ -1,5 +1,5 @@
 import requests
-
+from pprint import pprint as pp
 
 class SpotifyAPI:
     token_url = "https://accounts.spotify.com/api/token"
@@ -46,3 +46,8 @@ class SpotifyAPI:
             return self.get_search(query, search_type)
 
         return info
+
+
+spotify = SpotifyAPI()
+pp(spotify.get_search("NF", search_type='track'))
+
